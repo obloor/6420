@@ -1,0 +1,40 @@
+html {
+    box-sizing: border-box;
+
+}
+
+*, *::before, *::after {
+    box-sizing: inherit;
+}
+
+html, body{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 15px;
+    line-height: 1.5;
+    color: black;
+    background-color: white
+    ;
+}
+
+body {
+    float: left;
+}
+
+h1 {
+    font-size: 36px;
+}
+
+nav {
+    text-align: center;
+    padding-bottom: 25px;;
+}
+
+.content {
+    float:left;
+    width: 66.66666%; 
+}
+
+.sidebar {
+    float: left;
+    width: 33.3333%;
+}
