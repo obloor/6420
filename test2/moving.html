@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+    <style>
+        .mybackground {
+            position: relative;
+            overflow: hidden;
+            width: 800px;
+            height: 800px;
+            background-image: url(./assets/bgSky.jpg);
+        }
+
+        .mybackground .spaceship {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-image: url(./assets/spaceship.gif);
+            width: 110px;
+            height: 105px;
+            padding-top: 0px;
+            text-align: center;
+
+            color: black;
+            white-space: nowrap;
+        }
+
+        .myButton {
+            background-color: yellow;
+            width: 90px;
+            height: 30px;
+            border: 5px solid green;
+            padding: 0px 0px 0px 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mybackground">
+        <div style="left: 690px; top: 350px;" class="spaceship" id="myspaceship"></div>
+    </div>
+    <div class="myButton" id="start"> Start </div>
+    <script type="text/javascript">
+        
+        // Part 2 code goes here
+        let timer;
+        let sound;
+        let interval;
+        document.querySelector("#start").addEventListener("click", () => {
+        timer = setInterval(move, 30);
+        //play sound
+        sound = new Audio('./assets/fly.mp3');
+        sound.loop = true;
+        sound.play();
+        })
+
+        const spaceship = document.querySelector("#myspaceship");
+        let x  = 400;
+        let y = 690;
+        let offsetX = 2;
+        let offsetY = 2;
+        let path = 'a';
+
+        function move() {
+            let left = Number(spaceship.style.left.substring(0, spaceship.style.left.length - 2));
+            let top = Number(spaceship.style.top.substring(0, spaceship.style.top.length - 2));
+            
+            switch(path) {
+                case  "a":
+                    if (left<=0) {
+                    //next path
+                    path = "b";
+                    break;
+                    }
+                    left -= offsetX;
+                    top == offsetY;
+                    break;
+                case  "b":
+                    if (top<= 0) {
+                    //next path
+                    path = "c";
+                    break;
+                    }
+                    left += offsetX;
+                    top -= offsetY;
+                    break; 
+                case  "c":
+                    if (top>= 710) {
+                    //next path
+                    path = "d";
+                    break;
+                    }
+                    left == offsetX;
+                    top += offsetY;
+                    break; 
+                case  "d":
+                    if (left>= 690) {
+                    //next path
+                    path = "stop";
+                    break;
+                    }
+                    left += offsetX;
+                    top -= offsetY;
+                    break; 
+;
+                default:
+                    clearInterval(timer);
+                    time = null;
+                    if (sound) {
+                    sound.pause();
+                    sound.currentTime = 0;
+                    }
+                    break;
+
+            }
+            spaceship.style.left= `${left}px`;
+            spaceship.style.top= `${top}px`;
+        }
+
+    
+
+    </script>
+</body>
+
+</html

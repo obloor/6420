@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Part 1</title>
+    <style>
+        /* CSS Styles go here */
+        canvas {
+        background-color: #D9B3FF;
+        border: 10px solid chocolate;
+    }
+    </style>
+</head>
+
+<body>
+    <canvas id="canvas" width="800" height="500"></canvas>
+    <script>
+        // JavaScript goes here
+
+        const canvas = document.querySelector("canvas");
+        const ctx = canvas.getContext("2d");
+
+        let x = 400;
+        let y = 161;
+        let offset = 1;
+
+        function draw() {
+            ctx.clearRect(0,0, canvas.clientWidth, canvas.clientHeight);
+            x -= offset;
+            y -= offset;
+        
+
+        ctx.beginPath();
+        ctx.arc(400, 411, 200, Math.PI, Math.PI * 2);
+        ctx.fillStyle = "#999966";
+        ctx.lineWidth = 4; 
+        ctx.fill();
+        ctx.strokeStyle = "#663300";
+        ctx.stroke();
+        ctx.closePath();
+        
+        ctx.fillStyle = "#0099FF";
+        ctx.fillRect(0, 410, 800, 100);
+
+        ctx.beginPath();
+        ctx.arc(300, 380, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FFFF99";
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#663300";
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.beginPath();
+        ctx.arc(244, 380, 15, 0, 2 * Math.PI);
+        ctx.fillStyle = "#FFFF99";
+        ctx.fill();
+        ctx.lineWidth = 4;
+        ctx.strokeStyle = "#663300";
+        ctx.stroke();
+        ctx.closePath();
+
+        ctx.strokeStyle = "white";
+        ctx.lineWidth = 10; 
+        ctx.beginPath();
+        ctx.arc(x, y, 40,  0, Math.PI, false);
+        ctx.closePath();
+        ctx.stroke();
+
+
+
+        ctx.fillStyle = "#663300";
+        ctx.fillRect(600, 310, 50, 100);
+        }
+        function animate() {
+      draw(); 
+      requestAnimationFrame(animate); 
+    }
+        
+    animate(); 
+
+    setInterval(animate, 180);
+
+    </script>
+</body>
+
+</html>

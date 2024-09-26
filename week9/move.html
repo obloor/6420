@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Space Move</title>
+  <style>
+    canvas {
+      background-color: black;
+      display: block;
+      margin: auto;
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="spaceCanvas" width="500" height="500"></canvas>
+<button onclick="startSpaceShip()">Start Spaceship</button>
+
+<script>
+  const canvas = document.getElementById('spaceCanvas');
+  const ctx = canvas.getContext('2d');
+  let x = 250, y = 250; // Starting position (middle of the canvas)
+  let dx = 2, dy = 2;   // Speed of movement
+  let interval;         // Timer interval for movement
+  let path = 'a';       // Starting path
+
+  let sound = new Audio('space.mp3'); // Assuming space.mp3 is in the same directory
+
+  function drawSpaceShip() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.fillStyle = 'white';
+    ctx.fillRect(x, y, 50, 50); // Spaceship placeholder as a white square
+  }
+
+  function moveSpaceShip() {
+    switch (path) {
+      case 'a': // Path a: Diagonally up until P1
+        dx = -2;
+        dy = -2;
+        if (x <= 30 && y <= 30) {
+          path = 'b';
+        }
+        break;
+
+      case 'b': // Path b: Move down until P2
+        dx = 0;
+        dy = 2;
+        if (y >= 470) {
+          path = 'c';
+        }
+        break;
+
+      case 'c': // Path c: Diagonally up until P3
+        dx = 2;
+        dy = -2;
+        if (x >= 470 && y <= 30) {
+          path = 'd';
+        }
+        break;
+
+      case 'd': // Path d: Move down until P4
+        dx = 0;
+        dy = 2;
+        if (y >= 470) {
+          path = 'e';
+        }
+        break;
+
+      case 'e': // Path e: Diagonally up back to P0
+        dx = -2;
+        dy = -2;
+        if (x <= 250 && y <= 250) {
+          clearInterval(interval); // Stop movement
+          stopSound();             // Stop sound
+        }
+        break;
+    }
+
+    x += dx;
+    y += dy;
+    drawSpaceShip();
+  }
+
+  function startSpaceShip() {
+    if (!interval) {
+      interval = setInterval(moveSpaceShip, 30); // Move every 30 ms
+      sound.play();
+      sound.loop = true;
+    }
+  }
+
+  function stopSound() {
+    sound.pause();
+    sound.currentTime = 0;
+  }
+</script>
+
+</body>
+</html>

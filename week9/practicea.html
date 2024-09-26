@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mouth Animation</title>
+  <style>
+    canvas {
+      background-color: Linen;
+      border: 10px solid blue;
+    }
+  </style>
+</head>
+<body>
+  <canvas width="600" height="600"></canvas>
+  <script>
+    const canvas = document.querySelector("canvas");
+    const ctx = canvas.getContext("2d");
+
+    let x = 400;
+    let y = 200;
+    let offset = 1;
+    let radius = 22;
+    let increasing = true;
+    const minRadius = 22;
+    const maxRadius = 52;
+    const interval = 200; 
+
+
+    function draw() {
+      ctx.clearRect(0, 0, canvas.clientWidth, canvas.clientHeight);
+
+      // Draw body
+      ctx.fillStyle = "darkCyan";
+      ctx.fillRect(70, 400, 460, 180);
+
+      // Draw arc body
+      ctx.beginPath();
+      ctx.strokeStyle = "black";
+      ctx.lineWidth = 4;
+      ctx.arc(300, 400, 225, Math.PI, Math.PI * 2);
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fillStyle = "gold";
+      ctx.fill();
+
+      // Left circle
+      ctx.beginPath();
+      ctx.arc(70, 450, 50, 0.5 * Math.PI, 1.5 * Math.PI);
+      ctx.strokeStyle = "#663300";
+      ctx.lineWidth = 4;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fillStyle = "LawnGreen";
+      ctx.fill();
+
+      // Right circle
+      ctx.beginPath();
+      ctx.arc(530, 450, 50, 1.5 * Math.PI, 0.5 * Math.PI);
+      ctx.strokeStyle = "#663300";
+      ctx.lineWidth = 4;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fillStyle = "LawnGreen";
+      ctx.fill();
+
+      // Left eye
+      ctx.beginPath();
+      ctx.arc(240, 244, 40, 0, 2 * Math.PI);
+      ctx.strokeStyle = "#663300";
+      ctx.fillStyle = "PowderBlue";
+      ctx.lineWidth = 4;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+
+      // Right eye
+      ctx.beginPath();
+      ctx.arc(350, 244, 40, 0, 2 * Math.PI);
+      ctx.strokeStyle = "#663300";
+      ctx.fillStyle = "PowderBlue";
+      ctx.lineWidth = 4;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+
+      // Left pupil
+      ctx.beginPath();
+      ctx.arc(240, 244, 10, 0, 2 * Math.PI);
+      ctx.strokeStyle = "Blue";
+      ctx.fillStyle = "Black";
+      ctx.lineWidth = 5;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+
+      // Right pupil
+      ctx.beginPath();
+      ctx.arc(350, 244, 10, 0, 2 * Math.PI);
+      ctx.strokeStyle = "Blue";
+      ctx.fillStyle = "Black";
+      ctx.lineWidth = 5;
+      ctx.closePath();
+      ctx.stroke();
+      ctx.fill();
+
+      // Draw mouth with dynamic radius
+      ctx.beginPath();
+      ctx.arc(300, 330, radius, 0, Math.PI);
+      ctx.strokeStyle = "red";
+      ctx.lineWidth = 14;
+      ctx.closePath();
+      ctx.stroke();
+    }
+
+    // Function to animate the mouth radius
+    function animateMouth() {
+      if (increasing) {
+        radius += 2;
+        if (radius >= maxRadius) {
+          increasing = false;
+        }
+      } else {
+        radius -= 2;
+        if (radius <= minRadius) {
+          increasing = true;
+        }
+      }
+    }
+
+    // Main animation loop
+    function animate() {
+      draw(); // Draw everything
+      requestAnimationFrame(animate); // Loop the animation
+    }
+
+    // Set interval for mouth animation
+    setInterval(animateMouth, interval);
+
+    // Start the animation loop
+    animate();
+  </script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8">
+    <title>Marks</title>
+    <style>
+        body {
+            text-align: center;
+        }
+        table:has(tr) {
+            border: 2px solid darkblue;
+            margin: 10px 0px;
+            width: fit-content;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        td {
+            padding: 10px 20px;
+            background-color: rgba(112, 154, 189, 0.39);
+        }
+    </style>
+</head>
+
+<body>
+    <h1>Select Number</h1>
+    <button id="generate" type="button">Display Numbers</button>
+    <table id="output">
+    <tr>
+        <td>
+            <td> <button>tahi</button></td>
+            
+            <td><button>rua</button></td>
+            <td><button>toru</button></td>
+            <td><button>wha</button> </td>
+            <td> <button>rima</button></td>
+            <td> <button>ono</button> </td>
+            <td> <button>whitu</button></td>
+            <td> <button>waru</button> </td>
+            <td> <button>iwa</button></td>
+            <td> <button>tekau</button></td>
+        </td>
+    </tr>
+    </table>
+    <script>
+        
+
+        // provided data structure
+        document.querySelector("#generate").addEventListener("click", display_numbers);
+        
+        const numbers = ['tahi', 'rua', 'toru', 'wha', 'rima', 'ono', 'whitu', 'waru', 'iwa', 'tekau'];
+        const table = document.querySelector("#output");
+        
+        // Part 3 code goes here
+        function display_numbers() {
+            const numberTable = document.getElementById('numberTable');
+            numberTable.innerHTML = '';
+
+            const row = document.createElement('tr'); 
+
+    
+        }
+        
+
+        table.addEventListener('click', () => {
+                    switch (button) {
+                        case 'tahi':
+                            alert("You selected tahi");
+                            break;
+                        case 'rua':
+                            alert("You selected rua");
+                            break;
+                        case 'toru':
+                            alert("You selected toru");
+                            break;
+                        case 'wha':
+                            alert("You selected wha");
+                            break;
+                        default:
+                            alert("");
+                    }
+                });
+
+
+
+
+    </script>
+</body>
+
+</html>

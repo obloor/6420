@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="content-type" content="text/html;" charset="UTF-8">
+    <style>
+        .mybackground {
+            position: relative;
+            overflow: hidden;
+            width: 600px;
+            height: 600px;
+            background-image: url(./assets/grass_bg.jpg);
+        }
+
+        .mybackground .bee {
+            position: absolute;
+            top: 100px;
+            left: 100px;
+            background-image: url(./assets/bee.gif);
+            width: 140px;
+            height: 105px;
+            padding-top: 0px;
+            text-align: center;
+
+            color: black;
+            white-space: nowrap;
+        }
+
+        .myButton {
+            background-color: yellow;
+            width: 90px;
+            height: 30px;
+            border: 5px solid green;
+            padding: 0px 0px 0px 40px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="mybackground">
+        <div style="left: 200px; top: 500px;" class="bee" id="mybee"></div>
+    </div>
+    <div class="myButton" id="start"> Start </div>
+    <script type="text/javascript">
+        
+        // Part 2 code goes here
+        let timer;
+        let sound;
+        let interval;
+        document.querySelector("#start").addEventListener("click", () => {
+        timer = setInterval(moveBee, 30);
+        //play sound
+        sound = new Audio('./assets/bee.mp3');
+        sound.loop = true;
+        sound.play();
+        })
+
+        const bee = document.querySelector("#mybee");
+        let x  = 200;
+        let y = 500;
+        let offsetX = 2;
+        let offsetY = 2;
+        let path = 'a';
+
+        function moveBee() {
+            let left = Number(bee.style.left.substring(0, bee.style.left.length - 2));
+            let top = Number(bee.style.top.substring(0, bee.style.top.length - 2));
+            
+            switch(path) {
+                case  "a":
+                    if (top<=250) {
+                    //next path
+                    path = "b";
+                    break;
+                    }
+                    left -= offsetX;
+                    top -= offsetY;
+                    break;
+                case  "b":
+                    if (top<= 0) {
+                    //next path
+                    path = "c";
+                    break;
+                    }
+                    left += offsetX;
+                    top -= offsetY;
+                    break; 
+                case  "c":
+                    if (top>= 250) {
+                    //next path
+                    path = "d";
+                    break;
+                    }
+                    left += offsetX;
+                    top += offsetY;
+                    break; 
+                case  "d":
+                    if (top>= 500) {
+                    //next path
+                    path = "stop";
+                    break;
+                    }
+                    left -= offsetX;
+                    top += offsetY;
+                    break; 
+;
+                default:
+                    clearInterval(timer);
+                    time = null;
+                    if (sound) {
+                    sound.pause();
+                    sound.currentTime = 0;
+                    }
+                    break;
+
+            }
+            bee.style.left= `${left}px`;
+            bee.style.top= `${top}px`;
+        }
+
+    
+
+    </script>
+</body>
+
+</html
